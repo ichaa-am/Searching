@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAKS 5
+
+void tampil(int []);
+void seq_search(int[], int);
+
+int main()
+{
+    int key;
+    int A[] = {4, 2, 5, 3, 1};
+    puts("Data dalam array :");
+    tampil(A);
+    printf("Data yang akan dicari :");
+    scanf("%d", &key);
+    seq_search(A, key);
+
+    return 0;
+}
+
+void seq_search(int x[], int key)
+{
+    int i=0, find=0;
+
+    while(i<MAKS && !find){
+        if(x[i] == key)
+            find = 1;
+        else
+            i++;
+    }
+
+    if(find)
+        printf("%d berada pada indeks ke-%d\n", key, i);
+    else
+        printf("%d tidak ada dalam data array\n", key);
+
+}
+
+void tampil(int x[])
+{
+    int i;
+    for(i=0; i<MAKS; i++)
+        printf("%d ", x[i]);
+    puts(" ");
+}
