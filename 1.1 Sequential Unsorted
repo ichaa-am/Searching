@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAKS 5
+#define MAKS 10
 
 void tampil(int []);
 void seq_search(int[], int);
@@ -8,7 +8,7 @@ void seq_search(int[], int);
 int main()
 {
     int key;
-    int A[] = {4, 2, 5, 3, 1};
+    int A[] = {4, 2, 5, 3, 1, 9, 10, 6, 7, 8};
     puts("Data dalam array :");
     tampil(A);
     printf("Data yang akan dicari :");
@@ -27,13 +27,14 @@ void seq_search(int x[], int key)
             find = 1;
         else
             i++;
+        C++;
     }
 
     if(find)
         printf("%d berada pada indeks ke-%d\n", key, i);
     else
         printf("%d tidak ada dalam data array\n", key);
-
+    printf("Jumlah comparison : %d", C);
 }
 
 void tampil(int x[])
