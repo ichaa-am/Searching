@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAKS 5
+#define MAKS 10
+
+int C;
 
 void shell(int []);
 void tukar(int *, int *);
 void seq_search(int[], int);
+void bin_search(int [], int);
 void tampil(int []);
 void menu();
 
@@ -21,7 +24,7 @@ void menu(){
     int key;
     char pilih;
     do{
-        int A[] = {4, 2, 5, 3, 1};
+        int A[] = {4, 2, 5, 3, 1, 9, 10, 6, 7, 8};
         printf("Data dalam array : ");
         tampil(A);
         puts("MENU SEARCHING");
@@ -57,6 +60,7 @@ void menu(){
         scanf("%d", &key);
         fflush(stdin);
         bin_search(A, key);
+        break;
     default :
         puts("Pilih menu yang ada !\n");
         break;
@@ -107,13 +111,14 @@ void seq_search(int x[], int key)
             find = 1;
         else
             i++;
+        C++;
     }
 
     if(find)
-        printf("%d berada pada indeks ke-%d\n\n", key, i);
+        printf("%d berada pada indeks ke-%d\n", key, i);
     else
-        printf("%d tidak ada dalam data array\n\n", key);
-
+        printf("%d tidak ada dalam data array\n", key);
+    printf("Jumlah comparison : %d\n\n", C);
 }
 
 void bin_search(int x[], int key)
@@ -131,12 +136,13 @@ void bin_search(int x[], int key)
             l = m+1;
         else
             r=m-1;
+        C++;
     }
     if(find)
-        printf("%d berada pada indeks ke-%d\n\n", key, m);
+        printf("%d berada pada indeks ke-%d\n", key, m);
     else
-        printf("%d tidak ada dalam data array\n\n", key);
-
+        printf("%d tidak ada dalam data array\n", key);
+    printf("Jumlah comparison : %d\n\n", C);
 }
 
 void tampil(int x[])
