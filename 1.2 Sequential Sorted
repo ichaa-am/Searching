@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAKS 5
+
+void shell(int []);
+void tukar(int *, int *);
+void seq_search(int[], int);
+void tampil(int []);
+
+int main()
+{
+    int key;
+    int A[] = {4, 2, 5, 3, 1};
+    printf("Data dalam array : ");
+    tampil(A);
+    shell(A);
+    printf("Data setalah diurutkan : ");
+    tampil(A);
+    printf("Data yang akan dicari : ");
+    scanf("%d", &key);
+    seq_search(A, key);
+
+    return 0;
+}
+
+void shell(int x[])
+{
+    //printf("\nStep by step :\n");
+    int i, jarak, did_swap=1;
+    jarak=MAKS;
+    while(jarak>1)
+    {
+        jarak=jarak/2;
+        did_swap=1;
+        while(did_swap==1)
+        {
+            did_swap=0;
+            for(i=0; i<(MAKS-jarak); i++)
+            {
+                if(x[i] > x[i+jarak])
+                {
+                    tukar(&x[i], &x[i+jarak]);
+                    did_swap = 1;
+                    //tampil(x);
+                }
+            }
+        }
+    }
+}
+
+void tukar(int *x, int *y)
+{
+    int temp;
+    temp=*x;
+    *x=*y;
+    *y=temp;
+}
+
+void seq_search(int x[], int key)
+{
+    int i=0, find=0;
+
+    while(i<MAKS && !find){
+        if(x[i] == key)
+            find = 1;
+        else
+            i++;
+    }
+
+    if(find)
+        printf("%d berada pada indeks ke-%d\n", key, i);
+    else
+        printf("%d tidak ada dalam data array\n", key);
+
+}
+
+void tampil(int x[])
+{
+    int i;
+    for(i=0; i<MAKS; i++)
+        printf("%d ", x[i]);
+    puts(" ");
+}
