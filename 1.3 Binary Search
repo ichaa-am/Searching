@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAKS 5
+#define MAKS 10
+
+int C;
 
 void tampil(int []);
 void bin_search(int[], int);
@@ -10,7 +12,7 @@ void tukar(int *, int *);
 int main()
 {
    int key;
-    int A[] = {4, 2, 5, 3, 1};
+    int A[] = {4, 2, 5, 3, 1, 9, 10, 6, 7, 8};
     printf("Data dalam array : ");
     tampil(A);
     shell(A);
@@ -58,7 +60,6 @@ void tukar(int *x, int *y)
 
 void bin_search(int x[], int key)
 {
-    int C;
     int l, r, m, find=0;
 
     l=0;
