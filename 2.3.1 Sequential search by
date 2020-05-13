@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAKS 30
+
+typedef struct
+{
+    int no;
+    char nama[45];
+    char nilai;
+} siswa;
+
+int C;
+int n;
+
+void tampil(siswa []);
+void seq_search(siswa[], int);
+void input(siswa []);
+
+int main()
+{
+    siswa data[MAKS];
+    int based;
+    printf("Banyak jumlah siswa (MAKS 30): ");
+    scanf("%d", &n);
+    input(data);
+
+    printf("Pencarian Berdasarkan : \n");
+    printf("1. Nomor\n");
+    printf("2. Nama\n");
+    printf("3. Keluar\n");
+    printf("Pilihan Anda :");
+    scanf("%d", &based);
+    fflush(stdin);
+
+    seq_search(data, based);
+
+    return 0;
+}
+
+void input(siswa x[])
+{
+    int i;
+    for(i=0; i<n; i++)
+    {
+        printf("No : ");
+        scanf("%d", &x[i].no);
+        fflush(stdin);
+        printf("Nama : ");
+        scanf("%s", &x[i].nama);
+        fflush(stdin);
+        printf("Nilai : ");
+        scanf("%c", &x[i].nilai);
+        fflush(stdin);
+        puts("");
+    }
+}
+
+void seq_search(siswa x[], int based)
+{
+    int i=0, find=0, keyNo;
+    char keyNama[45];
+
+    if(based == 1)
+    {
+        printf("Nomor yang akan dicari : ");
+        scanf("%d", &keyNo);
+        fflush(stdin);
+        while(i<n && !find)
+        {
+            if  (x[i].no == keyNo)
+                find = 1;
+            else
+                i++;
+        }
+        if(find)
+        {
+            printf("Mahasiswa dengan no %d berada pada indeks %d\n", keyNo, i);
+            printf("\nNo\tNama\tNilai\n");
+            printf("%d\t%s\t%d\n",x[i].no, x[i].nama, x[i].nilai);
+        }
+        else
+            printf("Mahasiswa dengan no %d TIDAK ditemukan\n", keyNo);
+    }
+
+    else if(based == 2)
+    {
+        printf("Nama yang akan dicari : ");
+        gets(&keyNama);
+        fflush(stdin);
+        while(i<n && !find)
+        {
+            if  (strcmpi(x[i].nama, keyNama) == 0)
+                find = 1;
+            else
+                i++;
+        }
+
+        if(find)
+        {
+            printf("Mahasiswa dengan nama %s berada pada indeks %d\n", keyNama, i);
+            printf("\nNo\tNama\tNilai\n");
+            printf("%d\t%s\t%d\n",x[i].no, x[i].nama, x[i].nilai);
+        }
+        else
+            printf("Mahasiswa dengan nama %s TIDAK ditemukan\n", keyNama);
+    }
+
+}
+
+void tampil(siswa x[])
+{
+    int i;
+    printf("No\tNama\tNilai\n");
+    for(i=0; i<n; i++)
+        printf("%d\t%s\t%c\n", x[i].no, x[i].nama, x[i].nilai);
+    puts(" ");
+}
