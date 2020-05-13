@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAKS 30
+
+typedef struct{
+    int no;
+    char nama[45];
+    char nilai;
+}siswa;
+
+int C;
+int n;
+
+void tampil(siswa []);
+void seq_search(siswa[], int);
+void input(siswa []);
+
+int main()
+{
+    siswa data[MAKS];
+    int key, i;
+    //puts("Data dalam array :");
+    //tampil(A);
+    printf("Banyak jumlah siswa (MAKS 30): ");
+    scanf("%d", &n);
+    input(data);
+    printf("Data yang akan dicari :");
+    scanf("%d", &key);
+    seq_search(data, key);
+
+    return 0;
+}
+
+void input(siswa x[])
+{
+    int i;
+    for(i=0; i<n; i++)
+    {
+        printf("No : ");
+        scanf("%d", &x[i].no);
+        fflush(stdin);
+        printf("Nama : ");
+        scanf("%s", &x[i].nama);
+        fflush(stdin);
+        printf("Nilai : ");
+        scanf("%c", &x[i].nilai);
+        fflush(stdin);
+        puts("");
+    }
+}
+
+void seq_search(siswa x[], int key)
+{
+    int i=0, find=0;
+
+    while(i<n && !find){
+        if  (x[i].no == key)
+            find = 1;
+        else
+            i++;
+        C++;
+    }
+
+    if(find)
+        printf("%d berada pada indeks ke-%d\n", key, i);
+    else
+        printf("%d tidak ada dalam data array\n", key);
+    printf("Jumlah comparison : %d", C);
+}
+
+void tampil(siswa x[])
+{
+    int i;
+    printf("No\tNama\tNilai\n");
+    for(i=0; i<n; i++)
+        printf("%d\t%s\t%c\n", x[i].no, x[i].nama, x[i].nilai);
+    puts(" ");
+}
