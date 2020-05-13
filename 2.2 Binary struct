@@ -1,0 +1,122 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAKS 30
+
+typedef struct{
+    int no;
+    char nama[45];
+    int nilai;
+}siswa;
+
+int C;
+int n;
+
+void input(siswa []);
+void shell(siswa []);
+void tukar(siswa *, siswa *);
+void bin_search(siswa[], int);
+void tampil(siswa []);
+
+int main()
+{
+    siswa data[MAKS];
+    int key, i;
+    printf("Banyak jumlah siswa (MAKS 30): ");
+    scanf("%d", &n);
+    input(data);
+    shell(data);
+    puts("Data setelah diurutkan");
+    tampil(data);
+    printf("No data yang akan dicari :");
+    scanf("%d", &key);
+    bin_search(data, key);
+
+    return 0;
+}
+
+void input(siswa x[])
+{
+    int i;
+    for(i=0; i<n; i++)
+    {
+        printf("No : ");
+        scanf("%d", &x[i].no);
+        fflush(stdin);
+        printf("Nama : ");
+        scanf("%s", &x[i].nama);
+        fflush(stdin);
+        printf("Nilai : ");
+        scanf("%d", &x[i].nilai);
+        fflush(stdin);
+        puts("");
+    }
+}
+
+void shell(siswa x[])
+{
+    //printf("\nStep by step :\n");
+    int i, jarak, did_swap=1;
+    jarak=n;
+    while(jarak>1)
+    {
+        jarak=jarak/2;
+        did_swap=1;
+        while(did_swap==1)
+        {
+            did_swap=0;
+            i=0;
+            while(i<(n-jarak))
+            {
+                if(x[i].no > x[i+jarak].no)
+                {
+                    tukar(&x[i], &x[i+jarak]);
+                    did_swap = 1;
+                    //tampil(x);
+                }
+                i++;
+            }
+        }
+    }
+}
+
+void tukar(siswa *x, siswa *y)
+{
+    siswa temp;
+    temp=*x;
+    *x=*y;
+    *y=temp;
+}
+
+void bin_search(siswa x[], int key)
+{
+    int l, r, m, find=0;
+
+    l=0;
+    r=n-1;
+
+    while(l<=r && !find){
+        m = (l+r)/2;
+        if(x[m].no == key)
+            find=1;
+        else if(x[m].no < key)
+            l = m+1;
+        else
+            r=m-1;
+        C++;
+    }
+    if(find)
+        printf("%d berada pada indeks ke-%d\n", key, m);
+    else
+        printf("%d tidak ada dalam data array\n", key);
+    printf("Jumlah comparison : %d", C);
+}
+
+
+void tampil(siswa x[])
+{
+    int i;
+    printf("No\tNama\tNilai\n");
+    for(i=0; i<n; i++)
+        printf("%d\t%s\t%d\n", x[i].no, x[i].nama, x[i].nilai);
+    puts(" ");
+}
